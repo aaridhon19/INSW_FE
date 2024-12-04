@@ -4,19 +4,17 @@ import FormPungutan from '../Form/FormPungutan';
 import FormUtama from '../Form/FormUtama';
 import React, { useState } from 'react';
 
-export default function Tab(props) {
-    const { data1, data2, data3 } = props;
+export default function Tab({ data1, data2, data3, onNoPengajuanChange }) {
     const [activeTab, setActiveTab] = useState('data_utama');
     // console.log(dataUtama.dataUtama);
     // console.log(dataEntitas);
-
-
+    
     const renderContent = () => {
         switch (activeTab) {
             case 'data_utama':
                 return (
                     <div className="Tab-content-utama">
-                        <FormUtama dataUtama={data1} />
+                        <FormUtama dataUtama={data1} onNoPengajuanChangeForm={onNoPengajuanChange} />
                         <div className="Tab-buttons">
                             <button className="Tab-btn" disabled>Sebelumnya</button>
                             <button className="Tab-btn" onClick={() => setActiveTab('data_entitas')}>Selanjutnya</button>

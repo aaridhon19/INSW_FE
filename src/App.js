@@ -6,36 +6,42 @@ import Tab from './components/Tab/Tab';
 import axios from 'axios';
 
 function App() {
-  const [dataUtama, setDataUtama] = useState(null);
-  const [dataEntitas, setDataEntitas] = useState(null);
-  const [dataPungutan, setDataPungutan] = useState(null);
+  const [dataUtama, setDataUtama] = useState("");
+  const [dataEntitas, setDataEntitas] = useState("");
+  const [dataPungutan, setDataPungutan] = useState("");
+  const [noPengajuan, setNoPengajuan] = useState("");
+
+  const handleNoPengajuanChange = (newNoPengajuan) => {
+    setNoPengajuan(newNoPengajuan);
+  }
 
   useEffect(() => {
-    Promise.all([
-      axios.get('https://api-hub.ilcs.co.id/test/v2/dataUtama?nomor_pengajuan=20120B388FAE20240402000001'),
-      axios.get('https://api-hub.ilcs.co.id/test/v2/dataEntitas?id_aju=04eb6a72-bb63-5aed-5e92-f58a3bfd5da2'),
-      axios.get('https://api-hub.ilcs.co.id/test/v2/dataPungutan?id_aju=04eb6a72-bb63-5aed-5e92-f58a3bfd5da2')
-    ])
-      .then(([dataUtamaResponse, dataEntitasResponse, dataPungutanResponse]) => {
-        if (dataUtamaResponse.data.status) {
-          setDataUtama(dataUtamaResponse.data.data);
-          // console.log(dataUtamaResponse.data.data);
-          
-        }
-        if (dataEntitasResponse.data.status) {
-          setDataEntitas(dataEntitasResponse.data.data.pengusaha);
-          // console.log(dataEntitasResponse.data.data.pengusaha);
-          
-        }
-        if (dataPungutanResponse.data.status) {
-          setDataPungutan(dataPungutanResponse.data.data);
-          // console.log(dataPungutanResponse.data.data);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data:", error);
-      });
-  }, []);
+    if (noPengajuan) {
+      Promise.all([
+        axios.get('https://api-hub.ilcs.co.id/test/v2/dataUtama?nomor_pengajuan=20120B388FAE20240402000001'),
+        axios.get('https://api-hub.ilcs.co.id/test/v2/dataEntitas?id_aju=04eb6a72-bb63-5aed-5e92-f58a3bfd5da2'),
+        axios.get('https://api-hub.ilcs.co.id/test/v2/dataPungutan?id_aju=04eb6a72-bb63-5aed-5e92-f58a3bfd5da2')
+      ])
+        .then(([dataUtamaResponse, dataEntitasResponse, dataPungutanResponse]) => {
+          if (dataUtamaResponse.data.status) {
+            setDataUtama(dataUtamaResponse.data.data);
+            // console.log(dataUtamaResponse.data.data);
+          }
+          if (dataEntitasResponse.data.status) {
+            setDataEntitas(dataEntitasResponse.data.data.pengusaha);
+            // console.log(dataEntitasResponse.data.data.pengusaha);
+          }
+          if (dataPungutanResponse.data.status) {
+            setDataPungutan(dataPungutanResponse.data.data);
+            // console.log(dataPungutanResponse.data.data);
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error fetching the data:", error);
+        });
+    }
+  }, [noPengajuan]);
+
 
   return (
     <div className="App">
@@ -58,20 +64,20 @@ function App() {
         </div>
         <div className="App-content">
           <div className="App-content-body">
-            <div className="App-content-body-image"/>
+            <div className="App-content-body-image" />
             <div className="App-content-header">
               <div className="App-content-header-left">
                 <p>Data Pemberitahuan</p>
               </div>
               <div className="App-content-header-right">
-              <span>
-                  No Pengajuan : {dataUtama ? dataUtama.nomor_pengajuan : 'Loading...'} 
-                  | KSWP : VALID 
-                  | Jenis API : {dataEntitas ? dataEntitas.jenis_api : 'Loading...'}
+                <span>
+                  No Pengajuan : {dataUtama ? dataUtama.nomor_pengajuan : ''} 
+                  | KSWP : {dataUtama ? "VALID " : ''}
+                  | Jenis API : {dataEntitas ? dataEntitas.jenis_api : ''}
                 </span>
               </div>
             </div>
-            <Tab data1={dataUtama} data2={dataEntitas} data3={dataPungutan} />
+            <Tab data1={dataUtama} data2={dataEntitas} data3={dataPungutan} onNoPengajuanChange={handleNoPengajuanChange}/>
           </div>
         </div>
       </div>

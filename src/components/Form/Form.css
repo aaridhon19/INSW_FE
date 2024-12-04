@@ -159,3 +159,11 @@
 .Form-btn-two:hover {
   background-color: #293165;
 }
+
+.Form-invalid,
+.Form-loading {
+  font-size: 12px;
+  color: rgb(225, 18, 18);
+  margin-top: -10px;
+  margin-left: -10px;
+}
