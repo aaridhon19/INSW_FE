@@ -1,0 +1,54 @@
+.navbar {
+  background-color: #293165;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.navbar-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  width: 100px;
+  height: 40px;
+  background-image: url("../../assets/logo_insw.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-date {
+  color: #fff;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.navbar-notification {
+  width: 20px;
+  height: 20px;
+  background-image: url("../../assets/notification.svg");
+  background-position: center;
+  background-size: cover;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.navbar-profile {
+    width: 30px;
+    height: 30px;
+    background-image: url("../../assets/profile.png");
+    background-position: center;
+    background-size: cover;
+    color: #FFFFFF;
+    cursor: pointer;
+}

@@ -1,0 +1,20 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 4px;
+    text-align: left;
+    background-color: #dcdcdcc4;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.footer p {
+    margin-left: 10px;
+}
+
+.footer-span {
+    color: rgb(16, 26, 177);
+    margin-left: 4px;
+}
