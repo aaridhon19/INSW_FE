@@ -1,26 +1,46 @@
-import './Form.css'
 
-export default function FormPungutan(dataPungutan) {
+import { PungutanBtn } from '../Button/pungutanBtn';
+import { RefreshBtn } from '../Button/refreshBtn';
+import './Form.css'
+import { FormInput } from './FormInput';
+
+export default function FormPungutan({ dataPungutan, onRefresh }) {
     console.log(dataPungutan);
-    
+
+    const handleRefresh = () => {
+        if (onRefresh) {
+            onRefresh();
+        }
+    }
+
+    const handleSimpan = () => {
+        console.log('Simpan');
+    }
+
+    const handleKelengkapan = () => {
+        console.log('Kelengkapan Data');
+    }
+
     return (
         <div className="Form-pungutan">
             <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>Incoterms<span className="required">*</span></strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.ur_incoterm || ""} placeholder='Incoterms' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Valuta<span className="required">*</span></strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.ur_valuta || ""} placeholder='Valuta' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"Incoterms"}
+                    required={true}
+                    value={dataPungutan?.ur_incoterm || ""}
+                    placeholder={"Incoterms"}
+                />
+                <FormInput
+                    label={"Valuta"}
+                    required={true}
+                    value={dataPungutan?.ur_valuta || ""}
+                    placeholder={"Valuta"}
+                />
                 <div className="Form-section-three">
                     <strong className='Form-label'>Kurs</strong>
                     <div className="Form-operator-refresh">
-                        <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.nilai_kurs || ""} placeholder='Kurs' minLength={1} maxLength={10} />
-                        <div className='Form-refresh'>
-                            <div className='Form-refresh-image'/>
-                        </div>
+                        <input className='Form-control' type="text" value={dataPungutan?.nilai_kurs || ""} placeholder='Kurs' minLength={1} maxLength={10} />
+                        <RefreshBtn onClick={handleRefresh} />
                     </div>
                 </div>
             </div>
@@ -28,76 +48,103 @@ export default function FormPungutan(dataPungutan) {
                 <div className="Form-section-one">
                     <strong className='Form-label'>Nilai<span className="required">*</span></strong>
                     <div className="Form-operator">
-                        <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.nilai_incoterm || ""} placeholder='Nilai' minLength={1} maxLength={10} />
+                        <FormInput
+                            value={dataPungutan?.nilai_incoterm || ""}
+                            placeholder={"Nilai"}
+                        />
                         <span className='Form-operator-real'>+</span>
                     </div>
                 </div>
                 <div className="Form-section-two">
                     <strong className='Form-label'>Biaya Tambahan</strong>
                     <div className="Form-operator">
-                        <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.biaya_tambahan || ""} placeholder='Biaya Tambahan' minLength={1} maxLength={10} />
+                        <FormInput
+                            value={dataPungutan?.biaya_tambahan || ""}
+                            placeholder={"Biaya Tambahan"}
+                        />
                         <span className='Form-operator-real'>-</span>
                     </div>
                 </div>
                 <div className="Form-section-three">
                     <strong className='Form-label'>Biaya Pengurang</strong>
                     <div className="Form-operator">
-                        <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.biaya_pengurang || ""} placeholder='Biaya Pengurang' minLength={1} maxLength={10} />
+                        <FormInput
+                            value={dataPungutan?.biaya_pengurang || ""}
+                            placeholder={"Biaya Pengurang"}
+                        />
                         <span className='Form-operator-real'>+</span>
                     </div>
                 </div>
                 <div className="Form-section-four">
                     <strong className='Form-label'>Voluntary Declaration</strong>
                     <div className="Form-operator">
-                        <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.tarif_vd || ""} placeholder='Voluntary Declaration' minLength={1} maxLength={10} />
+                        <FormInput
+                            value={dataPungutan?.tarif_vd || ""}
+                            placeholder={"Voluntary Declaration"}
+                        />
                         <span className='Form-operator-real'>=</span>
                     </div>
                 </div>
-                <div className="Form-section-five">
-                    <strong className='Form-label'>Nilai FOB</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.fob || ""} placeholder='Nilai FOB' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"Nilai FOB"}
+                    required={false}
+                    value={dataPungutan?.fob || ""}
+                    placeholder={"Nilai FOB"}
+                />
             </div>
             <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>Asuransi Bayar di</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.ur_asuransi || ""} placeholder='Asuransi Bayar di' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Asuransi</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.nilai_asuransi || ""} placeholder='Asuransi' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-three">
-                    <strong className='Form-label'>Freigth</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.freight || ""} placeholder='Freigth' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"Asuransi Bayar di"}
+                    required={false}
+                    value={dataPungutan?.ur_asuransi || ""}
+                    placeholder={"Asuransi Bayar di"}
+                />
+                <FormInput
+                    label={"Asuransi"}
+                    required={false}
+                    value={dataPungutan?.nilai_asuransi || ""}
+                    placeholder={"Asuransi"}
+                />
+                <FormInput
+                    label={"Freight"}
+                    required={false}
+                    value={dataPungutan?.freight || ""}
+                    placeholder={"Freight"}
+                />
             </div>
             <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>CIF</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.nilai_pabean || ""} placeholder='CIF' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>CIF Rp</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.nilai_pabean_idr || ""} placeholder='CIF' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-three">
-                    <strong className='Form-label'>Brutto</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.berat_kotor || ""} placeholder='Brutto' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-four">
-                    <strong className='Form-label'>Netto</strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.berat_bersih || ""} placeholder='Netto' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-five">
-                    <strong className='Form-label'>Flag Kontainer<span className="required">*</span></strong>
-                    <input className='Form-control' type="text" value={dataPungutan.dataPungutan?.ur_flag_curah || ""} placeholder='Flag Kontainer' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"CIF"}
+                    required={false}
+                    value={dataPungutan?.nilai_pabean || ""}
+                    placeholder={"CIF"}
+                />
+                <FormInput
+                    label={"CIF Rp"}
+                    required={false}
+                    value={dataPungutan?.nilai_pabean_idr || ""}
+                    placeholder={"CIF Rp"}
+                />
+                <FormInput
+                    label={"Brutto"}
+                    required={false}
+                    value={dataPungutan?.berat_kotor || ""}
+                    placeholder={"Brutto"}
+                />
+                <FormInput
+                    label={"Netto"}
+                    required={false}
+                    value={dataPungutan?.berat_bersih || ""}
+                    placeholder={"Netto"}
+                />
+                <FormInput
+                    label={"Flag Kontainer"}
+                    required={true}
+                    value={dataPungutan?.ur_flag_curah || ""}
+                    placeholder={"Flag Kontainer"}
+                />
             </div>
-            <div className='Form-btn-pungutan'>
-                <button className="Form-btn-one">Kelengkapan Data</button>
-                <button className="Form-btn-two">Simpan</button>
-            </div>
+            <PungutanBtn onKelengkapanClick={handleKelengkapan} onSimpanClick={handleSimpan} />
         </div>
     )
 }

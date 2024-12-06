@@ -1,0 +1,59 @@
+.Btn-refresh {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3948ac;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-left: auto;
+}
+
+.Btn-refresh:hover {
+  background-color: #293165;
+}
+
+.Btn-refresh-image {
+  width: 16px;
+  height: 16px;
+  background-image: url("../../assets/repeate-one.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.Btn-pungutan {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.Btn-one {
+  padding: 10px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #f9bc04;
+  border: none;
+  font-weight: bold;
+}
+
+.Btn-one:hover {
+  background-color: #cc9b0a;
+}
+
+.Btn-two {
+  padding: 10px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #3948ac;
+  border: none;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.Btn-two:hover {
+  background-color: #293165;
+}

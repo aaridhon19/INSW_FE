@@ -1,78 +1,106 @@
 import './Form.css'
+import { FormInput } from './FormInput'
 
-export default function FormEntitas(dataEntitas) {
-    // console.log(dataEntitas);
-    
+export default function FormEntitas({ dataEntitas }) {
+
     return (
         <div className="Form-entitas">
             <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>Jenis Pemberitahuan<span className='required'>*</span></strong>
-                    <input className='Form-control-info' type="text" value={dataEntitas.dataEntitas?.ur_entitas || ""} placeholder='Jenis Pemberitahuan' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"Jenis Pemberitahuan"}
+                    required={true}
+                    value={dataEntitas?.ur_entitas || ""}
+                    placeholder={"Jenis Pemberitahuan"}
+                />
             </div>
             <div className="Form-title">
-                <p>{dataEntitas.dataEntitas?.ur_entitas || ""}</p>
-              </div>
-            <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>Jenis Identitas<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.ur_jenis_identitas || ""} placeholder='Jenis Identitas' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>NIB<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.nib || ""} placeholder='NIB' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-three">
-                    <strong className='Form-label'>No Identitas<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.nomor_identitas || ""} placeholder='No Identitas' minLength={1} maxLength={10} />
-                </div>
+                <p>{dataEntitas?.ur_entitas || ""}</p>
             </div>
             <div className="Form-section">
-                <div className="Form-section-one">
-                    <strong className='Form-label'>No Identitas (16 Digit)</strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.nomor_identitas || ""} placeholder='No Identitas (16 Digit)' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Nama Perusahaan<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.nama_identitas || ""} placeholder='Nama Perusahaan' minLength={1} maxLength={10} />
-                </div>
+                <FormInput 
+                    label={"Jenis Identitas"}
+                    required={true}
+                    value={dataEntitas?.ur_jenis_identitas || ""}
+                    placeholder={"Jenis Identitas"}
+                />
+                <FormInput 
+                    label={"NIB"}
+                    required={true}
+                    value={dataEntitas?.nib || ""}
+                    placeholder={"NIB"}
+                />
+                <FormInput
+                    label={"No Identitas"}
+                    required={true}
+                    value={dataEntitas?.nomor_identitas || ""}
+                    placeholder={"No Identitas"}
+                />
             </div>
             <div className="Form-section">
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Provinsi<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.provinsi_identitas || ""} placeholder='Provinsi' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Kota / Kabupaten<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.kota_identitas || ""} placeholder='Kota / Kabupaten' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Kecamatan<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.kecamatan || ""} placeholder='Kecamatan' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Kode Pos<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.kode_pos || ""} placeholder='Kode Pos' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>RT / RW<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.rt_rw || ""} placeholder='RT / RW' minLength={1} maxLength={10} />
-                </div>
+                <FormInput
+                    label={"No Identitas (16 Digit)"}
+                    required={false}
+                    value={dataEntitas?.nomor_identitas || ""}
+                    placeholder={"No Identitas (16 Digit)"}
+                />
+                <FormInput
+                    label={"Nama Perusahaan"}
+                    required={true}
+                    value={dataEntitas?.nama_identitas || ""}
+                    placeholder={"Nama Perusahaan"}
+                />
             </div>
             <div className="Form-section">
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Telephone<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.tlp_identitas || ""} placeholder='Telephone' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Email<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.email_identitas || ""} placeholder='Email' minLength={1} maxLength={10} />
-                </div>
-                <div className="Form-section-two">
-                    <strong className='Form-label'>Status<span className='required'>*</span></strong>
-                    <input className='Form-control' type="text" value={dataEntitas.dataEntitas?.status || ""} placeholder='Status' minLength={1} maxLength={10} />
-                </div>
+                <FormInput 
+                    label={"Provinsi"}
+                    required={true}
+                    value={dataEntitas?.provinsi_identitas || ""}
+                    placeholder={"Provinsi"}
+                />
+                <FormInput
+                    label={"Kota / Kabupaten"}
+                    required={true}
+                    value={dataEntitas?.kota_identitas || ""}
+                    placeholder={"Kota / Kabupaten"}
+                />
+                <FormInput
+                    label={"Kecamatan"}
+                    required={true}
+                    value={dataEntitas?.kecamatan || ""}
+                    placeholder={"Kecamatan"}
+                />
+                <FormInput 
+                    label={"Kode Pos"}
+                    required={true}
+                    value={dataEntitas?.kode_pos || ""}
+                    placeholder={"Kode Pos"}
+                />
+                <FormInput
+                    label={"RT / RW"}
+                    required={true}
+                    value={dataEntitas?.rt_rw || ""}
+                    placeholder={"RT / RW"}
+                />
+            </div>
+            <div className="Form-section">
+                <FormInput
+                    label={"Telephone"}
+                    required={true}
+                    value={dataEntitas?.tlp_identitas || ""}
+                    placeholder={"Telephone"}
+                />
+                <FormInput 
+                    label={"Email"}
+                    required={true}
+                    value={dataEntitas?.email_identitas || ""}
+                    placeholder={"Email"}
+                />
+                <FormInput
+                    label={"Status"}
+                    required={true}
+                    value={dataEntitas?.status || ""}
+                    placeholder={"Status"}
+                />
             </div>
         </div>
     )

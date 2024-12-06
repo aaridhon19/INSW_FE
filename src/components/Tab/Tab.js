@@ -3,72 +3,63 @@ import FormEntitas from '../Form/FormEntitas';
 import FormPungutan from '../Form/FormPungutan';
 import FormUtama from '../Form/FormUtama';
 import React, { useState } from 'react';
+import { TabNavigation } from './TabNavigation';
 
-export default function Tab({ data1, data2, data3, onNoPengajuanChange }) {
+export default function Tab({ data1, data2, data3, onNoPengajuanChange, onRefresh }) {
     const [activeTab, setActiveTab] = useState('data_utama');
-    // console.log(dataUtama.dataUtama);
-    // console.log(dataEntitas);
-    
-    const renderContent = () => {
-        switch (activeTab) {
-            case 'data_utama':
-                return (
-                    <div className="Tab-content-utama">
-                        <FormUtama dataUtama={data1} onNoPengajuanChangeForm={onNoPengajuanChange} />
-                        <div className="Tab-buttons">
-                            <button className="Tab-btn" disabled>Sebelumnya</button>
-                            <button className="Tab-btn" onClick={() => setActiveTab('data_entitas')}>Selanjutnya</button>
-                        </div>
-                    </div>
-                );
-            case 'data_entitas':
-                return (
-                    <div className="Tab-content">
-                        <FormEntitas dataEntitas={data2} />
-                        <div className="Tab-buttons">
-                            <button className="Tab-btn" onClick={() => setActiveTab('data_utama')}>Sebelumnya</button>
-                            <button className="Tab-btn" onClick={() => setActiveTab('data_pungutan')}>Selanjutnya</button>
-                        </div>
-                    </div>
-                );
-            case 'data_pungutan':
-                return (
-                    <div className="Tab-content">
-                        <FormPungutan dataPungutan={data3} />
-                        <div className="Tab-buttons">
-                            <button className="Tab-btn" onClick={() => setActiveTab('data_entitas')}>Sebelumnya</button>
-                            <button className="Tab-btn" disabled>Selanjutnya</button>
-                        </div>
-                    </div>
-                );
-            default:
-                return null;
-        }
-    };
+
+    const tabs = [
+        {
+            id: 'data_utama',
+            label: 'Data Utama',
+            content: (
+                <div className="Tab-content-utama">
+                    <FormUtama dataUtama={data1} onNoPengajuanChangeForm={onNoPengajuanChange} />
+                    <TabNavigation
+                        onPrevious={null}
+                        onNext={() => setActiveTab('data_entitas')}
+                    />
+                </div>
+            )
+        },
+        { 
+            id: 'data_entitas', 
+            label: 'Data Entitas',
+            content: (
+                <div className="Tab-content">
+                    <FormEntitas dataEntitas={data2} />
+                    <TabNavigation
+                        onPrevious={() => setActiveTab('data_utama')}
+                        onNext={() => setActiveTab('data_pungutan')}
+                    />
+                </div>
+            )
+        },
+        { 
+            id: 'data_pungutan', 
+            label: 'Data Pungutan',
+            content : (
+                <div className="Tab-content">
+                    <FormPungutan dataPungutan={data3} onRefresh={onRefresh}/>
+                    <TabNavigation
+                        onPrevious={() => setActiveTab('data_entitas')}
+                        onNext={null}
+                    />
+                </div>
+            )
+        },
+    ];
 
     return (
         <div className="Tab">
             <div className="Tab-header">
-                <button
-                    className={activeTab === 'data_utama' ? 'active' : ''}
-                    onClick={() => setActiveTab('data_utama')}
-                >
-                    Data Utama
-                </button>
-                <button
-                    className={activeTab === 'data_entitas' ? 'active' : ''}
-                    onClick={() => setActiveTab('data_entitas')}
-                >
-                    Data Entitas
-                </button>
-                <button
-                    className={activeTab === 'data_pungutan' ? 'active' : ''}
-                    onClick={() => setActiveTab('data_pungutan')}
-                >
-                    Data Pungutan
-                </button>
+                {tabs.map((tab) => (
+                    <button key={tab.id} className={activeTab === tab.id ? 'active' : ""} onClick={() => setActiveTab(tab.id)}>
+                        {tab.label}
+                    </button>
+                ))}
             </div>
-            <div>{renderContent()}</div>
+            <div>{tabs.find((tab) => tab.id === activeTab)?.content}</div>
         </div>
     );
 }
